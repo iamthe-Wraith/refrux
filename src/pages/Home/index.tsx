@@ -1,5 +1,5 @@
 import React from 'react';
-import { AddPostForm } from '../../components/AddPostForm';
+import { PostForm } from '../../components/PostForm';
 import { PostsList } from '../../components/PostsList';
 import { HomeContainer } from './styles';
 
@@ -11,7 +11,7 @@ export const Home: React.FC<IProps> = ({
     className = '',
 }) => (
     <HomeContainer className={ className }>
-        <AddPostForm />
+        <PostForm />
         <hr />
         <PostsList />
     </HomeContainer>

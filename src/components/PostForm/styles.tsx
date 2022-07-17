@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AddPostFormContainer = styled.div``;
+export const PostFormContainer = styled.div``;
 
 export const CtasContainer = styled.div`
     display: flex;
