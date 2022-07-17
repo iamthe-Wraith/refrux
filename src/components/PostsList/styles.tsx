@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const PostContainer = styled.article`
@@ -12,7 +13,7 @@ export const PostContainer = styled.article`
 
 export const PostContent = styled.p``;
 
-export const PostHeader = styled.p`
+export const PostHeader = styled(Link)`
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
     font-weight: bold;

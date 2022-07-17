@@ -18,7 +18,7 @@ export const PostsList: React.FC<IProps> = ({
 
     const renderedPosts = useMemo(() => posts.map(post => (
         <PostContainer key={ post.id }>
-            <PostHeader>{ post.title }</PostHeader>
+            <PostHeader to={ `/posts/${post.id}` }>{ post.title }</PostHeader>
             <PostContent>{ post.content }</PostContent>
         </PostContainer>
     )), [posts]);

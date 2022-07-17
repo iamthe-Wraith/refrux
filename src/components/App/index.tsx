@@ -1,6 +1,7 @@
 import React from 'react';
-import { AddPostForm } from '../AddPostForm';
-import { PostsList } from '../PostsList';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Home } from '../../pages/Home';
+import { Post } from '../../pages/Post';
 import { AppContainer } from './styles';
 
 interface IProps {
@@ -11,8 +12,11 @@ export const App: React.FC<IProps> = ({
     className = '',
 }) => (
     <AppContainer className={ className }>
-        <AddPostForm />
-        <hr />
-        <PostsList />
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={ <Home /> } />
+                <Route path='/posts/:postId' element={ <Post /> } />
+            </Routes>
+        </BrowserRouter>
     </AppContainer>
 );
