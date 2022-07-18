@@ -1,4 +1,3 @@
-import { nanoid } from '@reduxjs/toolkit';
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
@@ -27,13 +26,7 @@ export const PostForm: React.FC<IProps> = ({
     const onAddPostClick = useCallback(() => {
         if (!title || !content) return;
 
-        const _post = {
-            id: nanoid(),
-            title,
-            content,
-        };
-
-        dispatch(postAdded(_post));
+        dispatch(postAdded(title, content));
         clear();
     }, [title, content]);
 
