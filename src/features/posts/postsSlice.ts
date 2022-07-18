@@ -4,11 +4,22 @@ export interface IPost {
     id: string;
     title: string;
     content: string;
+    userId: string;
 }
 
 const initialState: IPost[] = [
-    { id: '1', title: 'First Post!', content: 'Hello!' },
-    { id: '2', title: 'Second Post', content: 'More text' },
+    {
+        id: '1',
+        title: 'First Post!',
+        content: 'Hello!',
+        userId: '1',
+    },
+    {
+        id: '2',
+        title: 'Second Post',
+        content: 'More text',
+        userId: '0',
+    },
 ];
 
 const _postAdded = (state: IPost[], action: PayloadAction<IPost>) => {
@@ -30,11 +41,12 @@ const postsSlice = createSlice({
     reducers: {
         postAdded: {
             reducer: _postAdded,
-            prepare: (title: string, content: string) => ({
+            prepare: (title: string, content: string, userId: string) => ({
                 payload: {
                     id: nanoid(),
                     title,
                     content,
+                    userId,
                 },
             }),
         },

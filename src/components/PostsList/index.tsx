@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
+import { PostAuthor } from '../PostAuthor';
 import {
     PostContainer,
     PostContent,
@@ -21,6 +22,7 @@ export const PostsList: React.FC<IProps> = ({
         <PostContainer key={ post.id }>
             <PostHeader to={ `/posts/${post.id}` }>{ post.title }</PostHeader>
             <PostContent>{ post.content }</PostContent>
+            <PostAuthor userId={ post.userId } />
             <Link to={ `/editPost/${post.id}` }>Edit</Link>
         </PostContainer>
     )), [posts]);

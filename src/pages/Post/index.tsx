@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
+import { PostAuthor } from '../../components/PostAuthor';
 import { PostContainer } from './styles';
 
 interface IProps {
@@ -24,6 +25,7 @@ export const Post: React.FC<IProps> = ({
         <PostContainer className={ className }>
             <Link to='/'>Home</Link>
             <h1>{ post.title }</h1>
+            <PostAuthor userId={ post.userId } />
             <p>{ post.content }</p>
         </PostContainer>
     );

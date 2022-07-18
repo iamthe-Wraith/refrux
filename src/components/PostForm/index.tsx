@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { useAppSelector } from '../../app/hooks';
 import { IPost, postAdded, postUpdated } from '../../features/posts/postsSlice';
 import { CtasContainer, FieldRow, PostFormContainer } from './styles';
 
@@ -15,18 +16,21 @@ export const PostForm: React.FC<IProps> = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const users = useAppSelector(state => state.users);
     const [title, setTitle] = useState(post?.title || '');
     const [content, setContent] = useState(post?.content || '');
+    const [userId, setUserId] = useState(post?.userId || users[0].id);
 
     const clear = useCallback(() => {
         setTitle('');
         setContent('');
+        if (!post) setUserId(users[0].id);
     }, []);
 
     const onAddPostClick = useCallback(() => {
-        if (!title || !content) return;
+        if (!title || !content || !userId) return;
 
-        dispatch(postAdded(title, content));
+        dispatch(postAdded(title, content, userId));
         clear();
     }, [title, content]);
 
@@ -52,6 +56,10 @@ export const PostForm: React.FC<IProps> = ({
         setTitle(e.target.value);
     }, []);
 
+    const onUserIdChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
+        setUserId(e.target.value);
+    }, []);
+
     return (
         <PostFormContainer className={ className }>
             <form>
@@ -73,6 +81,22 @@ export const PostForm: React.FC<IProps> = ({
                         value={ content }
                         onChange={ onContentChange }
                     />
+                </FieldRow>
+                <FieldRow>
+                    <label htmlFor='postUserId'>User:</label>
+                    <select
+                        id='postUserId'
+                        name='postUserId'
+                        disabled={ !!post }
+                        value={ userId }
+                        onChange={ onUserIdChange }
+                    >
+                        { users.map(user => (
+                            <option key={ user.id } value={ user.id }>
+                                { user.name }
+                            </option>
+                        )) }
+                    </select>
                 </FieldRow>
                 <CtasContainer>
                     <button type='button' onClick={ clear }>Clear</button>
