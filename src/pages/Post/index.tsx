@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { PostAuthor } from '../../components/PostAuthor';
+import { TimeAgo } from '../../components/TimeAgo';
 import { PostContainer } from './styles';
 
 interface IProps {
@@ -26,6 +27,7 @@ export const Post: React.FC<IProps> = ({
             <Link to='/'>Home</Link>
             <h1>{ post.title }</h1>
             <PostAuthor userId={ post.userId } />
+            <TimeAgo date={ post.date } />
             <p>{ post.content }</p>
         </PostContainer>
     );
