@@ -1,5 +1,8 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
+// eslint-disable-next-line import/no-cycle
+import { RootState } from '../../app/store';
+import { LoadingStatus } from '../../types';
 
 export interface IPost {
     id: string;
@@ -9,30 +12,25 @@ export interface IPost {
     userId: string;
 }
 
-const initialState: IPost[] = [
-    {
-        id: '1',
-        date: '2022-07-07T10:59:56.673Z',
-        title: 'First Post!',
-        content: 'Hello!',
-        userId: '1',
-    },
-    {
-        id: '2',
-        date: '2022-07-17T10:59:56.673Z',
-        title: 'Second Post',
-        content: 'More text',
-        userId: '0',
-    },
-];
+interface IPostsState {
+    posts: IPost[];
+    status: LoadingStatus;
+    error: string;
+}
 
-const _postAdded = (state: IPost[], action: PayloadAction<IPost>) => {
-    state.push(action.payload);
+const initialState: IPostsState = {
+    posts: [],
+    status: LoadingStatus.Idle,
+    error: '',
 };
 
-const _postUpdated = (state: IPost[], action: PayloadAction<IPost>) => {
+const _postAdded = (state: IPostsState, action: PayloadAction<IPost>) => {
+    state.posts.push(action.payload);
+};
+
+const _postUpdated = (state: IPostsState, action: PayloadAction<IPost>) => {
     const { id, title, content } = action.payload;
-    const existingPost = state.find(post => post.id === id);
+    const existingPost = state.posts.find(post => post.id === id);
     if (existingPost) {
         existingPost.title = title;
         existingPost.content = content;
@@ -60,5 +58,9 @@ const postsSlice = createSlice({
 });
 
 export const { postAdded, postUpdated } = postsSlice.actions;
+
+export const selectAllPosts = (state: RootState) => state.posts;
+
+export const selectPostById = (id: string) => (state: RootState) => state.posts.posts.find(post => post.id === id);
 
 export default postsSlice.reducer;

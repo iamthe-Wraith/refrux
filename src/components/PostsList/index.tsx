@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
+import { selectAllPosts } from '../../features/posts/postsSlice';
 import { PostAuthor } from '../PostAuthor';
 import { TimeAgo } from '../TimeAgo';
 import {
@@ -17,7 +18,7 @@ interface IProps {
 export const PostsList: React.FC<IProps> = ({
     className = '',
 }) => {
-    const posts = useAppSelector(state => state.posts);
+    const { posts } = useAppSelector(selectAllPosts);
     const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date));
 
     const renderedPosts = useMemo(() => orderedPosts.map(post => (

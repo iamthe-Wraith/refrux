@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppSelector } from '../../app/hooks';
+import { selectUserById } from '../../features/users/usersSlice';
 import { PostAuthorContainer } from './styles';
 
 interface IProps {
@@ -11,7 +12,7 @@ export const PostAuthor: React.FC<IProps> = ({
     className = '',
     userId,
 }) => {
-    const author = useAppSelector(state => state.users.find(user => user.id === userId));
+    const author = useAppSelector(selectUserById(userId));
 
     return (
         <PostAuthorContainer className={ className }>

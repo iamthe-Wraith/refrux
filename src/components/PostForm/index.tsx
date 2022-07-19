@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useAppSelector } from '../../app/hooks';
 import { IPost, postAdded, postUpdated } from '../../features/posts/postsSlice';
+import { selectAllUsers } from '../../features/users/usersSlice';
 import { CtasContainer, FieldRow, PostFormContainer } from './styles';
 
 interface IProps {
@@ -16,10 +17,10 @@ export const PostForm: React.FC<IProps> = ({
 }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const users = useAppSelector(state => state.users);
+    const { users } = useAppSelector(selectAllUsers);
     const [title, setTitle] = useState(post?.title || '');
     const [content, setContent] = useState(post?.content || '');
-    const [userId, setUserId] = useState(post?.userId || users[0].id);
+    const [userId, setUserId] = useState(post?.userId || users[0]?.id || '');
 
     const clear = useCallback(() => {
         setTitle('');

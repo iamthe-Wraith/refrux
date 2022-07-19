@@ -1,0 +1,23 @@
+{
+    "posts": [
+        {
+            "id": "1",
+            "date": "2022-07-07T10:59:56.673Z",
+            "title": "First Post!",
+            "content": "Hello!",
+            "userId": "1"
+        },
+        {
+            "id": "2",
+            "date": "2022-07-17T10:59:56.673Z",
+            "title": "Second Post!",
+            "content": "Hello, this is my second post",
+            "userId": "2"
+        }
+    ],
+    "users": [
+        { "id": "0", "name": "Tianna Jenkins" },
+        { "id": "1", "name": "Kevin Grant" },
+        { "id": "2", "name": "Madison Price" }
+    ]
+}
